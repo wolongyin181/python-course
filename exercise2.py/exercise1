@@ -1,0 +1,3 @@
+name="ash"
+output=f'Hello,{name}!'
+print(output)
