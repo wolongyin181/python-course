@@ -10,3 +10,4 @@ def shopping_calculator(shopping_cost,discount_applicable):
 
 total_shopping_cost = shopping_calculator(30,False)
 print(f'The total shopping cost is £{total_shopping_cost}')
+
