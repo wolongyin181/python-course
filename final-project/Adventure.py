@@ -107,7 +107,7 @@ monster_dict = [
 
 #variable to store data from functions
 distance = [500]
-heal_portion = [0]
+heal_potion = [0]
 
 #select a distance between 10-50 to travel. Total distance needs to travel is 500km.
 #If data input outside the range will ask to try again.
@@ -120,7 +120,7 @@ def new_game():
 
     while travel_distance>0:
         print(f"Capital is {travel_distance}km away. Please decide how long you want to travel today.")
-        daily_distance=int(input("Please input a number between 10-50."))
+        daily_distance=int(input("Please input a number between 10-50. "))
         
         if (daily_distance>=10 and daily_distance<=50):
             travel_distance=travel_distance - daily_distance
@@ -136,7 +136,7 @@ def new_game():
 #for each day's travel, randomly decide an event to happen
 #event = 1 is fight with monster
 #event = 2 is nothing happens
-#event = 3 is get a heal portion
+#event = 3 is get a heal potion
 def new_move():
 
     event=random.randint(1,3)
@@ -148,7 +148,7 @@ def new_move():
         nothing_happens()
         input()
     elif event == 3:
-        given_heal_portion()
+        given_heal_potion()
         input()
 
 #randomly define the monster to fight with, strength of monster depends on travel distance, longer travelled, stronger the monster
@@ -173,7 +173,7 @@ def new_fight():
 
     while monster_stats['health']>0:
         if (character_stats['health']>0):
-            choose_option = int(input("Please select from the following options: 1. Attack; 2. View stats."))
+            choose_option = int(input("Please select from the following options: 1. Attack; 2. View stats. "))
       
             if (choose_option == 1):
                 attack()
@@ -182,7 +182,7 @@ def new_fight():
                 view_stats()
                 continue
             else:
-                print("Sorry, please select from menu.")
+                print("Sorry, please select from menu. ")
                 continue
         else:
             near_death()
@@ -192,11 +192,11 @@ def new_fight():
 def nothing_happens():
     print ("It's almost dawn now. You decide to find a place to stay for the night.\nYou see the light from a village nearby. You know you will have a good rest tonight.")
 
-#being given a heal portion, number of heal portions can accumulate
-def given_heal_portion():
-    heal_portion[0]=heal_portion[0]+1
-    heal_portion_number=heal_portion[0]
-    print(f"It's almost dawn now. You decide to find a place to stay for the night.\nA shepherd showed you the direction to the closest village. Before he disappears, he also gives you some heal portion. You have {heal_portion_number} heal portion now.")
+#being given a heal potion, number of heal potions can accumulate
+def given_heal_potion():
+    heal_potion[0]=heal_potion[0]+1
+    heal_potion_number=heal_potion[0]
+    print(f"It's almost dawn now. You decide to find a place to stay for the night.\nA shepherd showed you the direction to the closest village. Before he disappears, he also gives you some heal potion. You have {heal_potion_number} heal potion now.")
 
 #when select attack, randomly decide one of the three events: hit, miss, been hit
 def attack():
@@ -245,19 +245,19 @@ def end_fight():
         character_health=character_stats['health']
         print(f"Congratulations, you win the fight! You are getting stronger! Character attack +1. Your new attack is {character_attack}. After a night of rest, you also fully recover. Your new health is {character_health}.")
 
-#when health<0 at any time during a fight, function to ask for using heal portion to +20 HP
-#if no heal portion is available -> game ends.
+#when health<0 at any time during a fight, function to ask for using heal potion to +20 HP
+#if no heal potion is available -> game ends.
 def near_death():
-    heal_portion_number=heal_portion[0]
-    if (heal_portion_number>0):
-        print(f"You are badly injured! You have {heal_portion_number} heal portions.")
-        heal=input("Do you want to use one?y/n")
+    heal_potion_number=heal_potion[0]
+    if (heal_potion_number>0):
+        print(f"You are badly injured! You have {heal_potion_number} heal potions.")
+        heal=input("Do you want to use one?y/n ")
 
         if (heal == 'y'):
-            heal_portion[0]=heal_portion[0]-1
+            heal_potion[0]=heal_potion[0]-1
             character_stats['health']=character_stats['health']+20
             character_health=character_stats['health']
-            print(f"The portion works! Your new health is {character_health}.")
+            print(f"The potion works! Your new health is {character_health}.")
         elif (heal == 'n'):
             print("You lose the fight. Don't worry, other warriors will protect the queen to Capital.")
             quit()
@@ -266,13 +266,12 @@ def near_death():
         quit()
 
 
-start_game = input("My warrior, our homeland is on fire.\nQueen has decided to travel back to the capital and stand with her people.\nWe need your help to protect the queen on her journey back home.\nMy warrior, on the journey you will encounter monsters sent by enermies. You will have to fight, you may be injured, and you may even die.\nMy warrior, do you dare to accept this challenge?\ny/n/end")
+start_game = input("My warrior, our homeland is on fire.\nQueen has decided to travel back to the capital and stand with her people.\nWe need your help to protect the queen on her journey back home.\nMy warrior, on the journey you will encounter monsters sent by enermies. You will have to fight, you may be injured, and you may even die.\nMy warrior, do you dare to accept this challenge?\ny/n ")
 
 if(start_game == 'y'):
     new_game()
 elif(start_game == 'n'):
     print("OK, let me know when you change your mind.")
-elif(start_game == 'end'):
     quit()
 else:
     print("Error input, please restart.")
